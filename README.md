@@ -2,7 +2,7 @@
 
 ![Latest release](https://img.shields.io/github/v/tag/deltachat-bot/echobot-go?label=release)
 [![CI](https://github.com/deltachat-bot/echobot-go/actions/workflows/ci.yml/badge.svg)](https://github.com/deltachat-bot/echobot-go/actions/workflows/ci.yml)
-![Coverage](https://img.shields.io/badge/Coverage-0%25-brightgreen)
+![Coverage](https://img.shields.io/badge/Coverage-22.2%25-red)
 [![Go Report Card](https://goreportcard.com/badge/github.com/deltachat-bot/echobot-go)](https://goreportcard.com/report/github.com/deltachat-bot/echobot-go)
 
 This is a template project using the [deltabot-cli-go](https://github.com/deltachat-bot/deltabot-cli-go) library.
