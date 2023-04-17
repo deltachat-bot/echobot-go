@@ -7,6 +7,14 @@
 
 This is a template project using the [deltabot-cli-go](https://github.com/deltachat-bot/deltabot-cli-go) library.
 
+Main features:
+
+* Unit tests, Github CI with fake email server
+* Auto-generated code coverage badge
+* Check code formatting
+* Check code with golangci-lint
+* Release code with goreleaser
+
 ## Install
 
 Binary releases can be found at: https://github.com/deltachat-bot/echobot-go/releases
