@@ -1,7 +1,7 @@
-// replace next line with your module name
+// TODO: replace next line with your module name
 module github.com/deltachat-bot/echobot-go
 
-go 1.19
+go 1.20
 
 require (
 	github.com/deltachat-bot/deltabot-cli-go v0.4.0
