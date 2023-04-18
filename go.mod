@@ -4,8 +4,8 @@ module github.com/deltachat-bot/echobot-go
 go 1.20
 
 require (
-	github.com/deltachat-bot/deltabot-cli-go v0.4.0
-	github.com/deltachat/deltachat-rpc-client-go v0.17.1-0.20230417205838-af6c36ff391b
+	github.com/deltachat-bot/deltabot-cli-go v0.4.1-0.20230418033838-9b3aebb62d58
+	github.com/deltachat/deltachat-rpc-client-go v0.17.1-0.20230417222922-fd102c51053c
 	github.com/spf13/cobra v1.7.0
 	github.com/stretchr/testify v1.8.2
 )

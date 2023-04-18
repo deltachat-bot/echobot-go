@@ -8,31 +8,33 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var cli *botcli.BotCli
-
 // echo back received text
-func echo(msg *deltachat.Message) {
+func echo(bot *deltachat.Bot, msg *deltachat.Message) {
 	snapshot, _ := msg.Snapshot()
-	chat := &deltachat.Chat{Account: snapshot.Account, Id: snapshot.ChatId}
+	chat := &deltachat.Chat{Account: msg.Account, Id: snapshot.ChatId}
 	if snapshot.Text != "" { // ignore messages without text
 		chat.SendText(snapshot.Text) //nolint:errcheck
 	}
 }
 
-func onInfoCmd(bot *deltachat.Bot, cmd *cobra.Command, args []string) {
+func onInfoCmd(cli *botcli.BotCli, bot *deltachat.Bot, cmd *cobra.Command, args []string) {
 	sysinfo, _ := bot.Account.Manager.SystemInfo()
 	for key, val := range sysinfo {
 		fmt.Printf("%v=%#v\n", key, val)
 	}
 }
 
-func onBotStart(bot *deltachat.Bot, cmd *cobra.Command, args []string) {
+func onBotInit(cli *botcli.BotCli, bot *deltachat.Bot, cmd *cobra.Command, args []string) {
+	bot.OnNewMsg(echo)
+}
+
+func onBotStart(cli *botcli.BotCli, bot *deltachat.Bot, cmd *cobra.Command, args []string) {
 	addr, _ := bot.GetConfig("configured_addr")
 	cli.Logger.Infof("Listening at: %v", addr)
 }
 
 func main() {
-	cli = botcli.New("echobot")
+	cli := botcli.New("echobot")
 
 	// add an "info" CLI subcommand as example
 	infoCmd := &cobra.Command{
@@ -42,7 +44,7 @@ func main() {
 	}
 	cli.AddCommand(infoCmd, onInfoCmd)
 
-	cli.OnBotInit(func(bot *deltachat.Bot, cmd *cobra.Command, args []string) { bot.OnNewMsg(echo) })
+	cli.OnBotInit(onBotInit)
 	cli.OnBotStart(onBotStart)
 
 	err := cli.Start()
