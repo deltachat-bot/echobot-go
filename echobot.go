@@ -9,16 +9,15 @@ import (
 )
 
 // echo back received text
-func echo(bot *deltachat.Bot, msg *deltachat.Message) {
-	snapshot, _ := msg.Snapshot()
-	chat := &deltachat.Chat{Account: msg.Account, Id: snapshot.ChatId}
-	if snapshot.Text != "" { // ignore messages without text
-		chat.SendText(snapshot.Text) //nolint:errcheck
+func echo(bot *deltachat.Bot, accId deltachat.AccountId, msgId deltachat.MsgId) {
+	msg, _ := bot.Rpc.GetMessage(accId, msgId)
+	if msg.FromId > deltachat.ContactLastSpecial && msg.Text != "" {
+		bot.Rpc.MiscSendTextMessage(accId, msg.ChatId, msg.Text) //nolint:errcheck
 	}
 }
 
 func onInfoCmd(cli *botcli.BotCli, bot *deltachat.Bot, cmd *cobra.Command, args []string) {
-	sysinfo, _ := bot.Account.Manager.SystemInfo()
+	sysinfo, _ := bot.Rpc.GetSystemInfo()
 	for key, val := range sysinfo {
 		fmt.Printf("%v=%#v\n", key, val)
 	}
@@ -29,8 +28,7 @@ func onBotInit(cli *botcli.BotCli, bot *deltachat.Bot, cmd *cobra.Command, args 
 }
 
 func onBotStart(cli *botcli.BotCli, bot *deltachat.Bot, cmd *cobra.Command, args []string) {
-	addr, _ := bot.GetConfig("configured_addr")
-	cli.Logger.Infof("Listening at: %v", addr)
+	cli.Logger.Info("OnBotStart event triggered: bot is about to start!")
 }
 
 func main() {
@@ -47,8 +45,7 @@ func main() {
 	cli.OnBotInit(onBotInit)
 	cli.OnBotStart(onBotStart)
 
-	err := cli.Start()
-	if err != nil {
+	if err := cli.Start(); err != nil {
 		cli.Logger.Error(err)
 	}
 }
