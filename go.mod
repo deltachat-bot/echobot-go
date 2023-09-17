@@ -1,11 +1,11 @@
 // TODO: replace next line with your module name
 module github.com/deltachat-bot/echobot-go
 
-go 1.20
+go 1.21
 
 require (
-	github.com/deltachat-bot/deltabot-cli-go v0.4.1-0.20230803033325-17ea31de55a9
-	github.com/deltachat/deltachat-rpc-client-go v0.17.1-0.20230803004831-c41345b8ffd8
+	github.com/deltachat-bot/deltabot-cli-go v0.4.1-0.20230917125509-c3c4b6311b46
+	github.com/deltachat/deltachat-rpc-client-go v0.17.1-0.20230829053314-3aca819c8a98
 	github.com/spf13/cobra v1.7.0
 	github.com/stretchr/testify v1.8.2
 )
