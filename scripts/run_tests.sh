@@ -24,9 +24,9 @@ fi
 if ! command -v deltachat-rpc-server &> /dev/null
 then
     echo "deltachat-rpc-server not found, installing..."
-    curl -L "https://github.com/deltachat/deltachat-core-rust/releases/download/v1.118.0/deltachat-rpc-server-x86_64" -o ~/.cargo/bin/deltachat-rpc-server
-    chmod +x ~/.cargo/bin/deltachat-rpc-server
-
+    curl -L https://github.com/deltachat/deltachat-core-rust/releases/latest/download/deltachat-rpc-server-x86_64-linux --output deltachat-rpc-server
+    chmod +x deltachat-rpc-server
+    export PATH=`pwd`:"$PATH"
 fi
 if ! command -v courtney &> /dev/null
 then
