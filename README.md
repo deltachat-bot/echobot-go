@@ -13,7 +13,7 @@ Main features:
 * Auto-generated code coverage badge
 * Check code formatting
 * Check code with golangci-lint
-* Release code with goreleaser
+* Release program with goreleaser
 
 ## Install
 
